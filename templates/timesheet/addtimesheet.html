@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="row">
+	<div class="col-md-6 offset-md-3">
+		<div class="card card-outline-secondary">
+			<div class="card-header">
+				<h3 class="mb-0">Add Timesheet</h3>
+			</div>
+			<div class="card-body">
+				<form role="form" method="post" action="" class = "form">
+					
+                    <div class="form-group">
+                        <label>date</label>
+                        <input type="date" id="date" name="date" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>number hours</label>
+                        <input type="number" id="hours" name="hours" class="form-control">
+                    </div>
+
+                    
+                    <hr>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-success float-right mr-3">Add</button>
+					</div>
+				</form>
+			</div>
+            
+		</div>
+	</div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#project').change(function(){
+            var selectedProject = $(this).val();
+            $.ajax({
+                url: '/get_task',
+                type: 'POST',
+                data: {
+                    selected_project: selectedProject
+                },
+                success: function(response) {
+                  $('#task').html(response.tasks);
+                  var taskSelect = $('#task');
+                  taskSelect.empty(); // Xóa tất cả các option hiện có
+                  // Thêm các option mới từ dữ liệu được trả về
+                  $.each(response.tasks, function(index, task) {
+                      taskSelect.append($('<option>', {
+                          value: task[0],
+                          text: task[1]
+                      }));
+                  });
+                  
+                }
+            });
+        });
+    });
+  </script>
+{% endblock %}

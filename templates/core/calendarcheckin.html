@@ -1,0 +1,103 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<body>
+    <div >
+        
+             <!-- Begin Page Content -->
+    <div class="container-fluid" >
+        <!-- Page Heading -->
+        <!-- <h1 class="h3 mb-2 text-gray-800">Role List</h1> -->
+
+        <!-- DataTales Example -->
+            <div class="card-header py-3 row">
+                <h6 class="m-0 font-weight-bold text-primary">Check in</h6>
+            </div>
+
+            <div class="search-container ml-auto mr-3">
+                <input class="rounded-input form-control" id="myInput" onkeyup="search('all')" placeholder="Searching...">
+            </div>
+                    
+            
+            <div class="card-body"  >
+                <div class="text-center" >
+                    <table id="myTable"  width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAllCheckbox"></th>
+                                <th>date</th>
+                                <th>checkin </th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody >
+                            <form method="post">
+                                {% for check in checkinstring %}
+                                <tr>
+                                    <td class="text-center"><input type="checkbox" name="checkbox" value="{{check[0]}}"></td>
+                                    <td>{{check[1]}}</td>
+
+                                    <td class="text-center">{{check[3]}}</td>
+                                 
+                                
+                                </tr>
+                                {% endfor %}    
+                               
+                            </form>
+                        </tbody>
+                    </table>
+                    <div class="row" >
+                        <p class="mr-auto ml-3" >
+                            Showing <span id="startEntry"></span> to <span id="endEntry"></span> of <span id="totalEntries"></span> entries
+                        </p>
+                        <p class="ml-auto">
+                            <div class="pagination mr-3">
+                                <!-- Button with double chevron left -->
+                                <!-- <button><i class="fas fa-chevron-double-left"></i></button> -->
+                                <!-- Button with single chevron left -->
+                                <button onclick="prevPage()"><i class="fas fa-chevron-left"></i></button>
+                                <!-- Pagination container for page numbers -->
+                                <div id="paginationContainer" class="pagination-container">
+                                    <!-- Page numbers will be dynamically added here -->
+                                </div>
+                                <!-- Button with single chevron right -->
+                                <button onclick="nextPage()"><i class="fas fa-chevron-right"></i></button>
+                                <!-- Button with double chevron right -->
+                                <!-- <button><i class="fas fa-chevron-double-right"></i></button> -->
+                            </div>
+                            <!-- Hidden div for displaying current page and total pages -->
+                            <div style="display: none;">
+                                Current Page: <span id="currentPage"></span> / <span id="totalPages"></span>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+</body>
+
+<script src="{{url_for('static',path='js/table_role.js')}}"></script>
+<script>
+    // Function to handle the click event of the "Select All" checkbox
+    document.getElementById("selectAllCheckbox").addEventListener("click", function() {
+        // Get all checkboxes in the table body
+        var checkboxes = document.querySelectorAll("tbody input[type='checkbox']");
+
+        // Loop through each checkbox and set its checked state to match the "Select All" checkbox
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = document.getElementById("selectAllCheckbox").checked;
+        });
+    });
+</script>
+
+{%endblock%}

@@ -1,0 +1,143 @@
+.custom-select {
+    max-width: 100px; /* Điều chỉnh chiều rộng của dropdown */
+  }
+  
+  .btn-primary,
+  .btn-danger {
+    padding: 0.375rem 0.75rem; /* Điều chỉnh padding của nút */
+  }
+  
+  .btn-primary:hover,
+  .btn-danger:hover {
+    color: #fff;
+  }
+  
+  .rounded-input {
+    border-radius: 1.25rem; /* Điều chỉnh góc bo tròn của input */
+    padding: 0.375rem 0.75rem; /* Điều chỉnh padding của input */
+  }
+  .search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  th {
+    border: 1px solid #ddd; /* Định dạng đường viền cho ô */
+    padding: 8px; /* Định dạng khoảng cách bên trong ô */
+    vertical-align: top;
+  }
+  
+  /* Định dạng cho ô input trong <th> */
+  th input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  }
+  
+  .pagination button {
+    background-color: #8c8d8f;
+    color: white;
+    border: none;
+    border-radius: 0; /* Remove border radius to make the buttons rectangular */
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+  }
+  .pagination-item {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  }
+  
+  .active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  }
+  
+  /* Tạo thanh query phụ */
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-container input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-right: 10px;
+  }
+  
+  .search-container input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  .myInput {
+      /* Your input styles here */
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    
+    .myTable {
+      /* Your table styles here */
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .myTable th, #myTable td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    
+    /* Add hover effect to table rows */
+    .myTable tr.header,
+    .myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+    .search-container {
+    position: relative;
+    
+    } 
+    .rounded-input {
+      border-radius: 20px; /* Điều chỉnh giá trị theo ý muốn */
+      border: 1px solid #ccc; /* Thêm viền */
+      padding: 8px; /* Tăng khoảng cách giữa nội dung và viền */
+      font-size: 16px; /* Điều chỉnh kích thước chữ */
+      width: 300px; /* Điều chỉnh chiều rộng */
+    }
+    
+    .myInput::placeholder {
+    font-family: "Font Awesome 5 Free"; /* Use Font Awesome font */
+    font-weight: 900; /* Adjust font weight */
+    content: "\f002"; /* Unicode for search icon */
+    }

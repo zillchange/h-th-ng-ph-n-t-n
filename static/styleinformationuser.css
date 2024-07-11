@@ -1,0 +1,39 @@
+.image-container {
+    text-align: center;
+    margin: 20px;
+}
+
+/* Style the rotated image */
+.rotated-image {
+    width: 150px; /* Set your desired width */
+    height: auto;
+    display: block; /* Make the image a block element */
+    margin: 0 auto; /* Center the image horizontally */
+    /* transform: rotate(-90deg); Rotate the image 90 degrees */
+}
+
+/* Add some space below the image */
+.spacer {
+    min-height: 10px; /* Set your desired minimum height */
+}
+.tab_hover:hover {
+
+  color: blue;
+
+}
+.dropdown-checkbox {
+display: none;
+}
+
+#dropdownLabel {
+cursor: pointer;
+}
+
+.dropdown-checkbox:checked + .dropdown-menu {
+display: block;
+}
+
+.dropdown-menu {
+display: none;
+/* Other styles for the dropdown menu */
+}

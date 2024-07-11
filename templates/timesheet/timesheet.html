@@ -1,0 +1,62 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<body>
+    <div class="container-fluid my-2">
+        <div class="card card-outline-secondary">
+            <div class="card-body">
+                <div class=" mb-3">
+                    <label type="button" for="addtimesheet" class="btn btn-success btn-sm mr-1" style="width: 100px;">Add</label> 
+                    <label type="button" for="removetimesheet" class="btn btn-danger btn-sm" style="width: 100px;">Delete</label>
+                    <label type="button" for="recalltimesheet" class="btn btn-primary btn-sm mr-1" style="width: 100px;">recall </label>
+                    <label type="button" for="submittimsheet" class="btn btn-primary btn-sm mr-1" style="width: 100px;">Submit </label>
+                </div>
+                <hr>
+                <p class="font-weight-bold text-center">List timesheet</p>
+                <table id="mytable" class="table table-bordered table-hover "  >
+                    <thead style="background-color: #ccc;table-layout: fixed;" class="text-center ">
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>date</th>
+                            <th>hour </th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form method="post">
+                            <button id="addtimesheet"  type="submit" name="addtimesheet" value="addtimesheet" hidden>Add Tasks</button>
+                            <button id="removetimesheet"  type="submit" name="removetimesheet" value="removetimesheet" hidden>Remove Tasks</button>
+                            <button id="recalltimesheet"  type="submit" name="recalltimesheet" value="recalltimesheet" hidden>recall leave</button>
+                            <button id="submittimsheet"  type="submit" name="submittimsheet" value="submittimsheet" hidden>Submit leave</button>
+                            {% for timesheet in timesheets %}
+                                <tr>
+                                    <td class="text-center"><input type="checkbox" name="checkbox" value="{{timesheet[0]}}"></td>
+                                    <td class="text-center">{{timesheet[1]}}</td>
+                                    <td class="text-center">{{timesheet[2]}}</td>
+                                    <td class="text-center">{{timesheet[3]}}</td>
+                            
+                    
+                                   
+                                </tr>
+                            {% endfor %}
+                        </form>
+                    </tbody>
+                </table>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end container -->
+    </div>
+</body>
+<script>
+    const selectAllCheckbox = document.getElementById("selectAll");
+    const checkboxes = document.querySelectorAll("table input[type='checkbox']");
+
+    selectAllCheckbox.addEventListener("change", () => {
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    });
+</script>
+{% endblock %}

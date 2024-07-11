@@ -1,0 +1,254 @@
+<style>
+    /* Ensure the navbar items have left margin when the screen is small */
+    @media (max-width: 767.98px) {
+      .navbar-nav .nav-item {
+        margin-left: 10px;
+      }
+    }
+    </style>
+  
+  <nav class="navbar navbar-expand-lg  ml-auto fixed-top p-1" style="background-color: #4e73df;">
+    <!-- {%if is_authenticated==0 %}
+    <a href="/home" onclick="resetLocalStorage()">
+      <img class="img-fluid img-thumbnail" style="max-width: 100%; height: 60px;" src="{{ url_for('static', path='source/logo_company.png') }}">
+    </a>
+    {%else%}
+    <a href="/signin" onclick="resetLocalStorage()">
+      <img class="img-fluid img-thumbnail" style="max-width: 100%; height: 60px;" src="{{ url_for('static', path='source/logo_company.png') }}">
+    </a>
+    {%endif%} -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+    </button>
+    <!-- <p>role:{{roleuser}}; Role_admin: {{roleadmin}}</p> -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {%if is_authenticated==1 and roleuser == "manager"  %}
+      <ul class="navbar-nav mr-auto ml-2">
+        
+        <li class="nav-item dropdown">
+            <a class="nav-link  text-white"  href="/home" role="button" aria-haspopup="true" aria-expanded="false" onclick="resetLocalStorage()">
+              <span class="mr-4 d-none d-lg-inline text-gray-1000 btn-lg">
+                <i class="fa-regular fa-square-caret-left fa-2x"></i>
+            </span>
+            </a>
+            
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto ml-2">
+        
+
+       
+        </li>
+        
+      </ul>
+      <ul class="navbar-nav ml-auto ml-2">
+        
+        <li class="nav-item dropdown">
+            <a class="nav-link  text-white"  href="/home" role="button" aria-haspopup="true" aria-expanded="false" onclick="resetLocalStorage()">
+              <span class="mr-4 d-none d-lg-inline text-gray-1000"><i class="fas fa-home fa-fw"></i></span>
+            </a>
+            
+        </li>
+  
+  
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-expanded="false" onclick="updatePath('Timesheet Management', 1)">Timesheet Management</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item " href="/timesheetview" onclick="updatePath('Timesheet', 2)">Timesheet</a>
+        </li>
+  
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle  text-white" data-toggle="dropdown" href="#" role="button" aria-expanded="false" onclick="updatePath('request Management', 1)">request Management</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item " href="/annualleaveadmin_view/all" onclick="updatePath('request View', 2)">request View</a>
+          </div>
+        </li>
+  
+        
+  
+        
+        
+        <div class="dropdown-divider"></div>
+        <li class="nav-item dropdown ml-2 mr-2">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="updatePath('My Profile', 1)"> 
+            <img class="mr-1 d-inline" style="width: 30px; height: 30px; border-radius: 50%;" src="{{ url_for('static', path='source/' + image_path) }}">
+            {{ fullname }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-custom" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/profile" onclick="updatePath('Profile', 2)">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              Profile
+            </a>
+            <a class="dropdown-item" href="\getcodechangepassword" onclick="updatePath('Change Password', 2)">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+              Change Password
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout" onclick="resetLocalStorage()">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
+          </div>
+        </li>
+        
+      </ul>
+ 
+
+      {% elif is_authenticated==1 and roleuser == "employee" and fullname %}
+      <ul class="navbar-nav ml-auto ml-2">
+        
+        <li class="nav-item dropdown">
+            <a class="nav-link  text-white"  href="/home" role="button" aria-haspopup="true" aria-expanded="false" onclick="resetLocalStorage()">
+              <span class="mr-4 d-none d-lg-inline text-gray-1000"><i class="fas fa-home fa-fw"></i></span>
+            </a>
+            
+        </li>
+  
+  
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-expanded="false" onclick="updatePath('update timesheet', 1)">update timesheet</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item " href="/updatetimesheet" onclick="updatePath('update timesheet', 1)">update timesheet</a>
+          </div>
+        </li>
+  
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle  text-white" data-toggle="dropdown" href="#" role="button" aria-expanded="false" onclick="updatePath('Request', 1)">Request</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item " href="/requestemployee" onclick="updatePath('request', 2)">request</a>
+           
+          </div>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li class="nav-item dropdown ml-2 mr-2">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="updatePath('My Profile', 1)">
+            <img class="mr-1 d-inline" style="width: 30px; height: 30px; border-radius: 50%;" src="{{ url_for('static', path='source/' + image_path) }}">
+            {{ fullname }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-custom" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/profile" onclick="updatePath('Profile', 2)">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              Profile
+            </a>
+            <a class="dropdown-item" href="/calendarcheckin" onclick="updatePath('Profile', 2)">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              checkin
+            </a>
+            <a class="dropdown-item" href="\getcodechangepassword" onclick="updatePath('Change Password', 2)">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+              Change Password
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout" onclick="resetLocalStorage()">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
+          </div>
+        </li>
+      </ul>
+      
+      {% else %}
+      <ul class="navbar-nav ml-auto ml-2">
+        
+                <!-- <li class="nav-item dropdown">
+                  <a class="nav-link  text-white"  href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-4 d-none d-lg-inline text-gray-1000">ABOUT</span>
+                  </a> 
+                </li> -->
+  
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link  text-white"  href="/signin" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="mr-4 d-none d-lg-inline text-gray-1000">SIGN IN</span>
+                </a> 
+            </li> -->
+  
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link  text-white"  href="/register" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-4 d-none d-lg-inline text-gray-1000">REGISTER</span>
+              </a> 
+          </li>  -->
+  
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link  text-white"  href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="mr-4 d-none d-lg-inline text-gray-1000">CONTACT</span>
+            </a> 
+          </li> -->
+      </ul>
+      {% endif %}
+  
+  
+      
+    </div>
+  </nav>
+  
+  
+  <div  style="padding-top: 70px;">
+    {% if is_authenticated==1 and (fullname or fullname_manager) %}
+    <div class="card-header row py-1 text-dark">
+        <p class="ml-3 mb-0" id="pathDisplay"></p>
+    </div>
+    {% endif %}
+  </div>
+  
+  <script>
+    window.onload = function() {
+        if (window.location.pathname === '/signin') {
+            resetLocalStorage();
+        }
+    };
+  
+    // Hàm reset dữ liệu trong localStorage
+    function resetLocalStorage() {
+        let path = ["Home"];
+        let lastLevelClicked = 1;
+        localStorage.setItem('path', JSON.stringify(path));
+        localStorage.setItem('lastLevelClicked', JSON.stringify(lastLevelClicked));
+        localStorage.setItem('isReloaded', 'true');
+  }
+    let path = JSON.parse(localStorage.getItem('path')) || ["Home"];
+    let lastLevelClicked = JSON.parse(localStorage.getItem('lastLevelClicked')) || 1;
+    
+    function updatePath(subPath, level) {
+        if (subPath === "Home") {
+            path = ["Home"];
+            lastLevelClicked = 1;   
+        } else {
+            if (level <= lastLevelClicked) {
+                path = ["Home"];
+                lastLevelClicked = level;
+            }
+  
+            if (path[path.length - 1] === subPath) return;
+  
+            let index = path.indexOf(subPath);
+            if (index !== -1) path.splice(index + 1);
+            else path.push(subPath);
+            lastLevelClicked = level;
+        }
+        localStorage.setItem('path', JSON.stringify(path));
+        localStorage.setItem('lastLevelClicked', JSON.stringify(lastLevelClicked));
+        localStorage.setItem('isReloaded', 'true'); 
+    }
+    document.getElementById('pathDisplay').textContent = path.join(" / ");
+  </script>
+  
+  <script>
+    function resetLocalStorage() {
+  // Xóa toàn bộ dữ liệu trong localStorage
+        localStorage.clear();
+  }
+  function combinationFunction(subPath, level) {
+  updatePath(subPath, level);        
+  localStorage.setItem('tableName', "");
+  localStorage.setItem('tailUpdate', "");
+  
+  // Lấy giá trị tableName và tailUpdate từ localStorage
+  var tableName = localStorage.getItem('tableName');
+  var tailUpdate = localStorage.getItem('tailUpdate');
+  
+  // Hiển thị giá trị trong console
+  console.log("Table Name:", tableName);
+  console.log("Tail Update:", tailUpdate);
+  }
+  
+  </script>
