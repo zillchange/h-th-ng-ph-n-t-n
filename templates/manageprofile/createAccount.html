@@ -1,0 +1,125 @@
+{% extends "_base.html" %} {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card card-outline-secondary">
+      <div class="card-header">
+        <h3 class="mb-0">Create account</h3>
+      </div>
+      <div class="card-body">
+        <form
+          role="form"
+          method="post"
+          action="/createAccount"
+          class="form"
+          id="createAccountForm"
+        >
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+            />
+            <div id="errorEmail" class="text-danger" style="display: none">
+              Email already exists. Please use another email.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Confirm password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              class="form-control"
+              required
+            />
+            <div id="errorPassword" class="text-danger" style="display: none">
+              Passwords do not match. Please try again.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Role</label>
+            <select class="form-control" id="role" name="role">
+              {% for role in roleusers %}
+              <option value="{{ role[0] }}">{{ role[1] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <button
+              type="submit"
+              class="btn btn-success float-right mr-3"
+              name="createAccount"
+            >
+              Create account
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $("#createAccountForm").on("submit", function (event) {
+      event.preventDefault();
+      var email = $("#email").val();
+      var pwd = $("#password").val();
+      var confirmPwd = $("#confirmPassword").val();
+      var role = $("#role").val();
+      var errorPassword = $("#errorPassword");
+      var errorEmail = $("#errorEmail");
+
+      // reset error message
+      errorEmail.hide();
+      errorPassword.hide();
+
+      if (pwd !== confirmPwd) {
+        errorPassword.show();
+        return;
+      }
+
+      $.ajax({
+        url: "/checkEmail",
+        method: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify({ email: email }),
+        success: function (response) {
+          $.ajax({
+            url: "/createAccount",
+            method: "POST",
+            contentType: 'application/json',
+            data: JSON.stringify({email: email, password: pwd, role: role}),
+            success: function(response)
+            {
+              window.location.href = '/addProfile';
+            }
+          });
+        },
+        error: function (xhr) {
+          if (xhr.status === 400) {
+            errorEmail.show();
+          }
+        },
+      });
+    });
+  });
+</script>
+{% endblock %}

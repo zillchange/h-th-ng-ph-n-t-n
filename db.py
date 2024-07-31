@@ -3,6 +3,6 @@ def connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="Tuan0843055059#",
+        password="Djeutrang21402#",
         database="distributed_system"
     )

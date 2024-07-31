@@ -1,0 +1,125 @@
+{% extends "_base.html" %} {% block content %}
+
+<div class="container-fluid my-2">
+  <div class="card card-outline-secondary">
+    <div class="card-body">
+      <div class="mb-3">
+        <h2>Profile Management</h2>
+      </div>
+      <hr />
+      {%if is_authenticated==1 and roleuser == "manager" %}
+      <p class="font-weight-bold text-center">List of profiles</p>
+      <table id="mytable" class="table table-bordered table-hover">
+        <thead
+          style="background-color: #ccc; table-layout: fixed"
+          class="text-center"
+        >
+          <tr>
+            <th>No</th>
+            <th>Full Name</th>
+            <th>Nation ID card</th>
+            <th>Tax number</th>
+            <th>Phone number</th>
+            <th>Address</th>
+            <th>Bank code</th>
+            <th>Bank name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <form>
+            <a href="/createAccount" class="btn btn-primary mb-3">Create account</a>
+            <a href="/addProfile" class="btn btn-primary mb-3 ml-3">Add profile</a>
+            {% for profile in profiles %}
+            <tr>
+              <td class="text-center">{{profile[0]}}</td>
+              <td class="text-center">{{profile[1]}}</td>
+              <td class="text-center">{{profile[2]}}</td>
+              <td class="text-center">{{profile[3]}}</td>
+              <td class="text-center">{{profile[4]}}</td>
+              <td class="text-center">{{profile[5]}}</td>
+              <td class="text-center">{{profile[6]}}</td>
+              <td class="text-center">{{profile[7]}}</td>
+              <td class="text-center d-flex justify-content-around">
+                <!-- <a href="#" class="view text-primary" title="View" data-toggle="tooltip"><i class="fa-solid fa-eye"></i></a> -->
+                <a
+                  href="/updateProfile?profileId={{profile[0]}}"
+                  class="edit text-warning"
+                  title="Edit"
+                  data-toggle="tooltip"
+                  ><i class="fa-solid fa-pen"></i
+                ></a>
+                <a
+                  href="/viewProfile?profileId={{profile[0]}}"
+                  class="delete text-primary"
+                  title="View"
+                  data-toggle="tooltip"
+                  ><i class="fa-solid fa-eye"></i
+                ></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </form>
+        </tbody>
+      </table>
+      {% elif is_authenticated==1 and roleuser == "employee" and fullname %}
+      <p class="font-weight-bold text-center">Your profile</p>
+      <table id="mytable" class="table table-bordered table-hover">
+        <thead
+          style="background-color: #ccc; table-layout: fixed"
+          class="text-center"
+        >
+          <tr>
+            <th>Full Name</th>
+            <th>Nation ID card</th>
+            <th>Tax number</th>
+            <th>Phone number</th>
+            <th>Address</th>
+            <th>Bank code</th>
+            <th>Bank name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <form>
+            {% for profile in profiles %}
+            <tr>
+              <td class="text-center">{{profile[1]}}</td>
+              <td class="text-center">{{profile[2]}}</td>
+              <td class="text-center">{{profile[3]}}</td>
+              <td class="text-center">{{profile[4]}}</td>
+              <td class="text-center">{{profile[5]}}</td>
+              <td class="text-center">{{profile[6]}}</td>
+              <td class="text-center">{{profile[7]}}</td>
+              <td class="text-center d-flex justify-content-around">
+                <!-- <a href="#" class="view text-primary" title="View" data-toggle="tooltip"><i class="fa-solid fa-eye"></i></a> -->
+                <a
+                  href="/updateProfile?profileId={{profile[0]}}"
+                  class="edit text-warning"
+                  title="Edit"
+                  data-toggle="tooltip"
+                  ><i class="fa-solid fa-pen"></i
+                ></a>
+                <a
+                  href="/viewProfile?profileId={{profile[0]}}"
+                  class="delete text-primary"
+                  title="View"
+                  data-toggle="tooltip"
+                  ><i class="fa-solid fa-eye"></i
+                ></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </form>
+        </tbody>
+      </table>
+      {% endif %}
+      <!-- end card body -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end container -->
+</div>
+
+<script></script>
+{% endblock %}
